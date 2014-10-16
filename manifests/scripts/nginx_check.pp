@@ -18,7 +18,6 @@ class zabbix::scripts::nginx_check () {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    require    => Package['nginx'],
   }
   
   file { "/etc/zabbix/scripts":
@@ -35,7 +34,15 @@ class zabbix::scripts::nginx_check () {
     mode    => '0750',
     replace => true,
     source  => "puppet:///modules/zabbix/nginx-check.sh",
-    
+  }
+
+  file { '/etc/zabbix/zabbix_agentd.d/nginx-params.conf':
+    ensure  => present,
+    owner   => 'zabbix',
+    group   => 'zabbix',
+    mode    => '0750',
+    replace => true,
+    source  => "puppet:///modules/zabbix/nginx-params.conf", 
   }
   
   # Nginx vhost to activate nginx status page
