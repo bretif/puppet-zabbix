@@ -1,6 +1,6 @@
-# == Class: zabbix::scripts::nginx
+# == Class: zabbix::scripts::apache
 #
-#  This will install backuppc script used to monitor nginx
+#  This will install apache script used to monitor apache
 #
 # === Authors
 #
@@ -10,10 +10,10 @@
 #
 # Copyright 2014 Bertrand RETIF
 #
-class zabbix::scripts::nginx_check () {
+class zabbix::scripts::apache_check () {
   
-  # Controlling the 'nginx' service
-  service { 'nginx':
+  # Controlling the 'apache2' service
+  service { 'apache2':
     ensure     => running,
     enable     => true,
     hasstatus  => true,
@@ -27,37 +27,36 @@ class zabbix::scripts::nginx_check () {
                 ensure  => [directory, present],
         }
 
-  file { '/etc/zabbix/scripts/nginx-check.sh':
+  file { '/etc/zabbix/scripts/apache-check.sh':
     ensure  => present,
     owner   => 'zabbix',
     group   => 'zabbix',
     mode    => '0750',
     replace => true,
-    source  => "puppet:///modules/zabbix/nginx-check.sh",
+    source  => "puppet:///modules/zabbix/apache-check.sh",
   }
 
-  file { '/etc/zabbix/zabbix_agentd.d/nginx-params.conf':
+  file { '/etc/zabbix/zabbix_agentd.d/apache-params.conf':
     ensure  => present,
     owner   => 'zabbix',
     group   => 'zabbix',
     mode    => '0750',
     replace => true,
-    source  => "puppet:///modules/zabbix/nginx-params.conf", 
+    source  => "puppet:///modules/zabbix/apache-params.conf", 
   }
   
-  # Nginx vhost to activate nginx status page
-  file { '/etc/nginx/sites-available/nginx_status.conf':
+  # Nginx vhost to activate apache status page
+  file { '/etc/apache2/sites-available/apache_status.conf':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    notify  => Service['nginx'],
-    content => template('zabbix/nginx_status.conf.erb'),
+    notify  => Service['apache2'],
+    content => template('zabbix/apache_status.conf.erb'),
   }
  
-  file { '/etc/nginx/sites-enabled/nginx_status.conf':
+  file { '/etc/apache2/sites-enabled/apache_status.conf':
    ensure => 'link',
-   target => '/etc/nginx/sites-available/nginx_status.conf',
-  }
-  
+   target => '/etc/apache2/sites-available/apache_status.conf',
+  } 
 }
