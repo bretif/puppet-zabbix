@@ -10,6 +10,7 @@ Listen 10061
 		SetHandler server-status
 		Order deny,allow
 		Deny from all
+		Allow from 127.0.0.1
 		Allow from 10.1.1.6
 		Allow from 46.105.144.246
 		Allow from 10.0.200.0/24
