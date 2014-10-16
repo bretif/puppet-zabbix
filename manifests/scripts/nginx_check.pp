@@ -12,6 +12,15 @@
 #
 class zabbix::scripts::nginx_check () {
   
+  # Controlling the 'nginx' service
+  service { 'nginx':
+    ensure     => running,
+    enable     => true,
+    hasstatus  => true,
+    hasrestart => true,
+    require    => Package['nginx'],
+  }
+  
   file { "/etc/zabbix/scripts":
                 owner   => "zabbix",
                 group   => "zabbix",
@@ -36,8 +45,6 @@ class zabbix::scripts::nginx_check () {
     group   => 'root',
     mode    => '0644',
     notify  => Service['nginx'],
-    require => Package['nginx'],
-    replace => true,
     content => template('zabbix/nginx_status.conf.erb'),
   }
  
