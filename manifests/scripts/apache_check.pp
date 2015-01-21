@@ -40,12 +40,12 @@ class zabbix::scripts::apache_check () {
     ensure  => present,
     owner   => 'zabbix',
     group   => 'zabbix',
-    mode    => '0750',
+    mode    => '0664',
     replace => true,
     source  => "puppet:///modules/zabbix/apache-params.conf", 
   }
   
-  # Nginx vhost to activate apache status page
+  # Vhost to activate apache status page
   file { '/etc/apache2/sites-available/apache_status.conf':
     ensure  => present,
     owner   => 'root',

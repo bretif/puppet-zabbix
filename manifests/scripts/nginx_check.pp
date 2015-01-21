@@ -40,7 +40,7 @@ class zabbix::scripts::nginx_check () {
     ensure  => present,
     owner   => 'zabbix',
     group   => 'zabbix',
-    mode    => '0750',
+    mode    => '0644',
     replace => true,
     source  => "puppet:///modules/zabbix/nginx-params.conf", 
   }
