@@ -1,4 +1,4 @@
-# == Class: zabbix::scripts::apache
+# == Class: zabbix::scripts::disks_io
 #
 #  This will install apache script used to monitor apache
 #
