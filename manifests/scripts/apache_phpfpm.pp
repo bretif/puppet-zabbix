@@ -12,6 +12,8 @@
 #
 class zabbix::scripts::apache_phpfpm () {
   
+  package { gawk: ensure => latest }
+  
   file { '/etc/zabbix/scripts/phpfpm-check.sh':
     ensure  => present,
     owner   => 'zabbix',
