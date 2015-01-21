@@ -31,7 +31,7 @@ class zabbix::scripts::apache_phpfpm () {
   }
   
   # Vhost to activate php-fpm status page on specific port
-  file { '/etc/apache2/sites-available/apache_phpfpm_status.conf':
+  file { '/etc/apache2/sites-available/phpfpm_status.conf':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -40,8 +40,8 @@ class zabbix::scripts::apache_phpfpm () {
     content => template('zabbix/apache_phpfpm_status.conf.erb'),
   }
  
-  file { '/etc/apache2/sites-enabled/apache_phpfpm_status.conf':
+  file { '/etc/apache2/sites-enabled/phpfpm_status.conf':
    ensure => 'link',
-   target => '/etc/apache2/sites-available/apache_phpfpm_status.conf',
+   target => '/etc/apache2/sites-available/phpfpm_status.conf',
   } 
 }
