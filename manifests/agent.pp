@@ -280,6 +280,13 @@ class zabbix::agent (
     purge   => true,
     require => File['/etc/zabbix/zabbix_agentd.conf'],
   }
+  
+  file { "/etc/zabbix/scripts":
+                owner   => "zabbix",
+                group   => "zabbix",
+                mode    => 0755,
+                ensure  => [directory, present],
+        }
 
   # Manage firewall
   if $manage_firewall {

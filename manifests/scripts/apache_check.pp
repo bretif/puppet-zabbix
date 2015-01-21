@@ -19,13 +19,6 @@ class zabbix::scripts::apache_check () {
     hasstatus  => true,
     hasrestart => true,
   }
-  
-  file { "/etc/zabbix/scripts":
-                owner   => "zabbix",
-                group   => "zabbix",
-                mode    => 0755,
-                ensure  => [directory, present],
-        }
 
   file { '/etc/zabbix/scripts/apache-check.sh':
     ensure  => present,

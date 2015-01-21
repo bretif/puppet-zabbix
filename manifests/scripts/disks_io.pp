@@ -11,13 +11,6 @@
 # Copyright 2014 Bertrand RETIF
 #
 class zabbix::scripts::disks_io () {
- 
-  file { "/etc/zabbix/scripts":
-                owner   => "zabbix",
-                group   => "zabbix",
-                mode    => 0755,
-                ensure  => [directory, present],
-        }
 
   file { '/etc/zabbix/scripts/lld-disks.py':
     ensure  => present,
