@@ -16,12 +16,6 @@ class zabbix::scripts::backuppc () {
   package { 'zabbix-sender':
     ensure  => present,
   }
-  file { "/etc/zabbix/scripts":
-                owner   => "zabbix",
-                group   => "zabbix",
-                mode    => 0755,
-                ensure  => [directory, present],
-        }
 
   file { '/etc/zabbix/scripts/backuppc_info.pl':
     ensure  => present,
